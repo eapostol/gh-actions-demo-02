@@ -1,0 +1,30 @@
+name: Lint workflow
+# Trigger workflow on pull requests
+on:
+    pull_request:
+        branches:
+          - dev
+          - main
+jobs:
+    # test job
+    test:
+        # Use Ubuntu 20.04 LTS
+        runs-on: ubuntu-latest
+        # Steps to execute
+        steps:
+            # Checkout the repository
+            - name: Checkout Code
+              uses: actions/checkout@v1
+            # install NodeJS
+            - name: Setup Node
+              uses: actions/setup-node@v1
+              with:
+                node-version: '14.x'
+            # Build App and Install dependencies
+            - name: Install Dependencies
+              run: npm install
+            # Lint the code
+            - name: Lint
+              run: npm run lint
+
+
